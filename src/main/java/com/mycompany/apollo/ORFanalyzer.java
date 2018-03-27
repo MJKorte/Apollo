@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Mark
  */
 public class ORFanalyzer {
-    
+    //GG
     public static ArrayList<ORF> ORFs = new ArrayList<ORF>();
     public static ArrayList<String> htmlcode = new ArrayList<String>();
     public static double countMax;
