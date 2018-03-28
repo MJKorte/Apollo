@@ -26,6 +26,8 @@ public class ORFanalyzer {
         countDone = 0;
         int idcounter = 0;
         for (int i = 0; i <= 2; i++) {
+            System.out.println(reads.get(i).length());
+            System.out.println(reads.get(i).length() / 3);
             boolean ORF = false;
             String html = "";
             String spatie = "&nbsp;&nbsp;";
@@ -36,14 +38,14 @@ public class ORFanalyzer {
                 html += "..";
             }
             String currentORF = "";
-            for (int x = 0; x < reads.get(i).length(); x++) {
+            for (int x = 0; x < reads.get(i).length() / 3; x++) {
                 countDone++;
                 ApolloGUI.jProgressBar1.setValue((int) ((countDone / countMax) * 100));
                 System.out.println("value of " + countDone + "/" + countMax + " = " + (int) ((countDone / countMax) * 100));
-                String protein = Character.toString(reads.get(i).charAt(x));
-                if (protein.equals("M") && ORF == false && reads.get(i).length() - x > 100) {
+                String protein = TranslatorFW.translate(reads.get(i).substring(3*x, 3*(x+1)));
+                if (protein.equals("M") && ORF == false && reads.get(i).length()/3 - x > 100) {
                     ORF = true;
-                    html += String.format("<span><a href=%2d>", idcounter) + protein + "&nbsp;&nbsp;";
+                    currentORF += String.format("<span><a href=%2d>", idcounter) + protein + spatie;
                 } else if (protein.equals(".") && ORF == true) {
                     if (currentORF.length() <= 1300) {
                         currentORF += protein + spatie;
@@ -56,10 +58,10 @@ public class ORFanalyzer {
                         idcounter++;
                     }
                 } else if (ORF == true) {
-                    if (reads.get(i).length() - x >= 2) {
+                    if (reads.get(i).length() - x*3 >= 2) {
                         currentORF += protein + spatie;
                     } else {
-                        html += currentORF.replace(">naps/<>a/<", "");
+                        html += currentORF.replace(String.format("<span><a href=%2d>", idcounter), "");
                         html += protein + spatie;
                     }
                 } else {
@@ -70,45 +72,47 @@ public class ORFanalyzer {
             htmlcode.add(html);
         }
         for (int i = 3; i <= 5; i++) {
+            System.out.println(reads.get(i).length());
+            System.out.println(reads.get(i).length() / 3);
             boolean ORF = false;
             String html = "";
             String currentORF = "";
-            for (int x = 0; x < reads.get(i).length(); x++) {
-                String protein = Character.toString(reads.get(i).charAt(x));
-                String spatie = new StringBuilder("&nbsp;&nbsp;").reverse().toString();
-                if (protein.equals("M") && ORF == false && reads.get(i).length() - x > 100) {
-                    ORF = true;
-                    html += spatie + ">naps/<>a/<" + protein;
-                } else if (protein.equals(".") && ORF == true) {
-                    if (currentORF.length() <= 1300) {
-                        currentORF += spatie + protein;
-                    } else {
-                        ORF = false;
-                        currentORF += spatie + protein;
-                        ORFs.add(new ORF(idcounter, new StringBuilder(currentORF).reverse().toString().replace("&nbsp;&nbsp;", ""), i + 1));
-                        html += currentORF + String.format(">%d=ferh a<>naps<", Integer.parseInt(new StringBuilder(String.valueOf(idcounter)).reverse().toString()));
-                        currentORF = "";
-                        idcounter++;
-                    }
-                } else if (ORF == true) {
-                    if (reads.get(i).length() - x >= 2) {
-                        currentORF += spatie + protein;
-                    } else {
-                        html += currentORF.replace(">naps/<>a/<", "");
-                        html += spatie + protein;
-                    }
-                } else {
-                    html += spatie + protein;
-                }
-            }
+            html += "<br>";
             if (i == 4) {
                 html += ".";
             }
             if (i == 5) {
                 html += "..";
             }
-            html += ">rb<";
-            htmlcode.add(new StringBuilder(html).reverse().toString());
+            for (int x = 0; x < reads.get(i).length() / 3; x++) {
+                String protein = TranslatorRE.translate(reads.get(i).substring(3*x, 3*(x+1)));
+                String spatie = "&nbsp;&nbsp;";
+                if (protein.equals(".") && ORF == false && reads.get(i).length()/3 - x > 100) {
+                    ORF = true;
+                    currentORF += String.format("<span><a href=%2d>", idcounter) + protein + spatie;
+                } else if (protein.equals("M") && ORF == true) {
+                    if (currentORF.length() <= 1300) {
+                        currentORF += protein + spatie;
+                    } else {
+                        ORF = false;
+                        currentORF += protein;
+                        ORFs.add(new ORF(idcounter, currentORF.replace(spatie, ""), i + 1));
+                        html += currentORF + "</a></span>" + spatie;
+                        currentORF = "";
+                        idcounter++;
+                    }
+                } else if (ORF == true) {
+                    if (reads.get(i).length()/3 - x >= 2) {
+                        currentORF += protein + spatie;
+                    } else {
+                        html += currentORF.replace(String.format("<span><a href=%2d>", idcounter), "");
+                        html += protein + spatie;
+                    }
+                } else {
+                    html += protein + spatie;
+                }
+            }
+            htmlcode.add(html);
         }
         //System.out.println("RF 1: " + htmlcode.get(0));
         //System.out.println("RF 2: " + htmlcode.get(1));
