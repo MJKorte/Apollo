@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author Mark
  */
 public class ORFanalyzer {
+
     //GG
     public static ArrayList<ORF> ORFs = new ArrayList<ORF>();
     public static ArrayList<String> htmlcode = new ArrayList<String>();
@@ -28,17 +29,17 @@ public class ORFanalyzer {
             boolean ORF = false;
             String html = "";
             String spatie = "&nbsp;&nbsp;";
-            if(i==1){
-               html += "."; 
+            if (i == 1) {
+                html += ".";
             }
-            if(i==2){
-               html += ".."; 
-            }            
+            if (i == 2) {
+                html += "..";
+            }
             String currentORF = "";
             for (int x = 0; x < reads.get(i).length(); x++) {
                 countDone++;
-                ApolloGUI.jProgressBar1.setValue((int)((countDone/countMax)*100));
-                System.out.println("value of "+countDone+"/"+countMax+" = "+(int)((countDone/countMax)*100));
+                ApolloGUI.jProgressBar1.setValue((int) ((countDone / countMax) * 100));
+                System.out.println("value of " + countDone + "/" + countMax + " = " + (int) ((countDone / countMax) * 100));
                 String protein = Character.toString(reads.get(i).charAt(x));
                 if (protein.equals("M") && ORF == false && reads.get(i).length() - x > 100) {
                     ORF = true;
@@ -55,12 +56,11 @@ public class ORFanalyzer {
                         idcounter++;
                     }
                 } else if (ORF == true) {
-                    if(reads.get(i).length() - x >= 2){
+                    if (reads.get(i).length() - x >= 2) {
                         currentORF += protein + spatie;
-                    }
-                    else{
-                        html+= currentORF.replace(">naps/<>a/<", "");
-                        html+= protein + spatie;
+                    } else {
+                        html += currentORF.replace(">naps/<>a/<", "");
+                        html += protein + spatie;
                     }
                 } else {
                     html += protein + spatie;
@@ -78,36 +78,35 @@ public class ORFanalyzer {
                 String spatie = new StringBuilder("&nbsp;&nbsp;").reverse().toString();
                 if (protein.equals("M") && ORF == false && reads.get(i).length() - x > 100) {
                     ORF = true;
-                    html +=  spatie + ">naps/<>a/<"+ protein;
+                    html += spatie + ">naps/<>a/<" + protein;
                 } else if (protein.equals(".") && ORF == true) {
                     if (currentORF.length() <= 1300) {
-                        currentORF += spatie +  protein;
+                        currentORF += spatie + protein;
                     } else {
                         ORF = false;
-                        currentORF += spatie +  protein;
+                        currentORF += spatie + protein;
                         ORFs.add(new ORF(idcounter, new StringBuilder(currentORF).reverse().toString().replace("&nbsp;&nbsp;", ""), i + 1));
                         html += currentORF + String.format(">%d=ferh a<>naps<", Integer.parseInt(new StringBuilder(String.valueOf(idcounter)).reverse().toString()));
                         currentORF = "";
                         idcounter++;
                     }
                 } else if (ORF == true) {
-                    if(reads.get(i).length() - x >= 2){
-                        currentORF += spatie +  protein;
-                    }
-                    else{
-                        html+= currentORF.replace(">naps/<>a/<", "");
-                        html+= spatie + protein;
+                    if (reads.get(i).length() - x >= 2) {
+                        currentORF += spatie + protein;
+                    } else {
+                        html += currentORF.replace(">naps/<>a/<", "");
+                        html += spatie + protein;
                     }
                 } else {
-                    html += spatie +  protein;
+                    html += spatie + protein;
                 }
             }
-                if(i==4){
-                    html += "."; 
-                    }
-                if(i==5){
-                    html += "..";
-                }
+            if (i == 4) {
+                html += ".";
+            }
+            if (i == 5) {
+                html += "..";
+            }
             html += ">rb<";
             htmlcode.add(new StringBuilder(html).reverse().toString());
         }
