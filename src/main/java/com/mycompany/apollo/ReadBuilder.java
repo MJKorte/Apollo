@@ -20,7 +20,6 @@ public class ReadBuilder { //Feel free to edit the name
         reads.clear();
         temp.clear();
         for(int i = 0; i <= 2; i++){
-            System.out.println("why: "+i);
             reads.add(DNAseq.substring(i));
             temp.add(DNAseq.substring(i));
         }

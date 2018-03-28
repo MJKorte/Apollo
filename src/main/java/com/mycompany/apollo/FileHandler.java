@@ -63,7 +63,6 @@ public class FileHandler {
                 }
             }
         }
-        System.out.println("GG");
         return seq;
     }
     

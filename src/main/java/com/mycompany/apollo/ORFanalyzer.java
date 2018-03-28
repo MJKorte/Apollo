@@ -26,8 +26,6 @@ public class ORFanalyzer {
         countDone = 0;
         int idcounter = 0;
         for (int i = 0; i <= 2; i++) {
-            System.out.println(reads.get(i).length());
-            System.out.println(reads.get(i).length() / 3);
             boolean ORF = false;
             String html = "";
             String spatie = "&nbsp;&nbsp;";
@@ -41,7 +39,6 @@ public class ORFanalyzer {
             for (int x = 0; x < reads.get(i).length() / 3; x++) {
                 countDone++;
                 ApolloGUI.jProgressBar1.setValue((int) ((countDone / countMax) * 100));
-                System.out.println("value of " + countDone + "/" + countMax + " = " + (int) ((countDone / countMax) * 100));
                 String protein = TranslatorFW.translate(reads.get(i).substring(3*x, 3*(x+1)));
                 if (protein.equals("M") && ORF == false && reads.get(i).length()/3 - x > 100) {
                     ORF = true;
@@ -58,7 +55,7 @@ public class ORFanalyzer {
                         idcounter++;
                     }
                 } else if (ORF == true) {
-                    if (reads.get(i).length() - x*3 >= 2) {
+                    if (reads.get(i).length()/3 - x >= 2) {
                         currentORF += protein + spatie;
                     } else {
                         html += currentORF.replace(String.format("<span><a href=%2d>", idcounter), "");
@@ -114,12 +111,6 @@ public class ORFanalyzer {
             }
             htmlcode.add(html);
         }
-        //System.out.println("RF 1: " + htmlcode.get(0));
-        //System.out.println("RF 2: " + htmlcode.get(1));
-        //System.out.println("RF 3: " + htmlcode.get(2));
-        //System.out.println("RF 4: " + htmlcode.get(3));
-        //System.out.println("RF 5: " + htmlcode.get(4));
-        //System.out.println("RF 6: " + htmlcode.get(5));
         System.out.println("Totaal aantal ORFs: " + ORFs.size());
         ApolloGUI.ORFs = ORFs;
         ApolloGUI.progressScreen.setVisible(false);

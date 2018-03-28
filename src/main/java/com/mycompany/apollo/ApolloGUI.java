@@ -205,8 +205,6 @@ public class ApolloGUI extends javax.swing.JFrame {
 
     private void OpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenActionPerformed
         dnaSeq = FileHandler.FileOpener();
-        System.out.println("DNASEQ:");
-        System.out.println(dnaSeq);
         progressScreen.setVisible(true);
     }//GEN-LAST:event_OpenActionPerformed
 
