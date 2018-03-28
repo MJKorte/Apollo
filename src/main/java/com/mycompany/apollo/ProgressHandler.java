@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class ProgressHandler extends Thread {
 
+    @Override
     public void run() {
         ApolloGUI.jProgressBar1.setIndeterminate(true);
         ApolloGUI.jProgressBar1.setString("Loading reading frames");
@@ -46,7 +47,7 @@ public class ProgressHandler extends Thread {
                 + readsHTML.get(5) + "</p>"
                 + "</body>"
                 + "</html>"
-        );       
+        );
         ApolloGUI.sequencePane.setLocation(0, 0);
     }
 }

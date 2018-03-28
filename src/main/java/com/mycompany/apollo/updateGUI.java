@@ -10,12 +10,20 @@ package com.mycompany.apollo;
  * @author rogie
  */
 public class updateGUI {
-    public void updateReads(){
-        
+
+    public void updateReads() {
+
     }
-    
-    public static void updateORFInfoPane(int ORFid){
+
+    public static void updateORFInfoPane(int ORFid) {
+        String updatedText;
         ORF orf = ApolloGUI.ORFs.get(ORFid);
-        ApolloGUI.ORFInfoPane.setText("Reading frame: "+orf.readNr);
+        updatedText = "Reading frame: " + orf.readNr;
+        if (orf.blasted) {
+            updatedText += "\nE_Value: " + orf.getE_Value();
+        } else {
+            updatedText += "\nNo blast results yet";
+        }
+        ApolloGUI.ORFInfoPane.setText(updatedText);
     }
 }
