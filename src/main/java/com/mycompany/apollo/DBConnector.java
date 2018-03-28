@@ -20,11 +20,11 @@ public class DBConnector extends ApolloGUI {
     
     public void dbVuller(String dnaSeq, String header, int lengte, String ORF_sequentie, int start_positie, int stop_positie, int reading_frame, int hits, int e_value, int identity, String accesion_code, String link){
         System.out.println("dbvuller test");
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//        } catch (ClassNotFoundException e) {                                    //Exception handling voor vinden van de plugin
-//            e.printStackTrace();
-//        }
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+        } catch (ClassNotFoundException e) {                                    //Exception handling voor vinden van de plugin
+            e.printStackTrace();
+        }
         
         
         Connection connect = null;                                              //Initialisatie v.d. connectie en statements
@@ -34,28 +34,27 @@ public class DBConnector extends ApolloGUI {
         PreparedStatement preStatement4 = null;
             
 //        String myDriver = "com.mysql.jdbc.Driver";                              //Driver
-        //String myUrl = "jdbc:mysql://www.cytosine.nl:3306/owe7/_pg10";               //Connection type : protocol : host : port : database
-        String myUrl = "jdbc:mysql://85.214.90.171:80";
+              //Connection type : protocol : host : port : database
+        String myUrl = "jdbc:oracle:thin:@www.cytosine.nl:80:owe7_pg10";
         String User = "owe7_pg10";
         String Password = "blaat1234";
-//        String myUrl = "jdbc:mysql://localhost:3306"; 
         
         try {
-            connect = DriverManager.getConnection(myUrl, User, Password);  //Username : wachtwoord
-            //System.out.println(conn.getClientInfo());
+            connect = DriverManager.getConnection(myUrl, User, Password);  //URL : Username : wachtwoord
+//            System.out.println(connect.getClientInfo());
             
             Statement statement;                                                //Initialisatie statement
             statement = connect.createStatement();
         
-            String getseqID_Query = "SELECT MAX(entry_ID) as entry_ID from entry"; //Query voor het ophalen van de grootste entry_ID
-            ResultSet rs1 = statement.executeQuery(getseqID_Query);             //Uitvoeren van de query
-            while (rs1.next()) {
-                entryID = rs1.getInt("entry_ID");                                   //Waarde ophalen uit database
-                }
-            entryID +=1;                                                          //1 wordt opgeteld bij de oude sequentie voor een niewe entry id.
+//            String getseqID_Query = "SELECT MAX(entry_ID) as entry_ID from entry"; //Query voor het ophalen van de grootste entry_ID
+//            ResultSet rs1 = statement.executeQuery(getseqID_Query);             //Uitvoeren van de query
+//            while (rs1.next()) {
+//                entryID = rs1.getInt("entry_ID");                                   //Waarde ophalen uit database
+//                }
+//            entryID +=1;                                                          //1 wordt opgeteld bij de oude sequentie voor een niewe entry id.
             
             
-            //query voor de seq_ID
+            //query voor de ORF_ID
             String getorfID_Query = "SELECT MAX(ORF_ID) as ORF_ID from ORF";    //Query voor het ophalen van de grootste ORF_ID
             ResultSet rs2 = statement.executeQuery(getorfID_Query);             //Uitvoeren van de query
             while (rs2.next()) {
@@ -72,7 +71,9 @@ public class DBConnector extends ApolloGUI {
             preStatement1.setString (3, header);
             
             preStatement1.executeUpdate();                                      //update de tabel
-             
+            System.out.println("entry done");
+            
+            
             //query voor het inserten in ORF tabel
             String insertORFQuery = "INSERT INTO ORF(ORF_ID, entry_entry_ID, orf_sequence, start_loc , stop_loc, read_frame) VALUES(?,?,?,?,?)"; //Query
             preStatement2 = connect.prepareStatement(insertORFQuery);              //PreStatement2 wordt gekoppeld aan de ORF query
@@ -84,6 +85,7 @@ public class DBConnector extends ApolloGUI {
             preStatement2.setInt     (6, reading_frame);
             
             preStatement2.executeUpdate();                                      //update de tabel
+            System.out.println("ORF done");
             
             String insertBLASTQuery = "INSERT INTO BLAST_results(BLAST_ID, ORF_ORF_ID, hits)"; //query
             preStatement3 = connect.prepareStatement(insertBLASTQuery);
@@ -92,6 +94,7 @@ public class DBConnector extends ApolloGUI {
             preStatement3.setInt (3, hits);
             
             preStatement3.executeUpdate();
+            System.out.println("Blast result done");
             
             String insertBLAST_hitQuery = "INSERT INTO BLAST_hit(BLAST_HIT_ID, E_Value, Identity, Accesion_code, Link)";
             preStatement4 = connect.prepareStatement(insertBLAST_hitQuery);
@@ -103,6 +106,7 @@ public class DBConnector extends ApolloGUI {
             preStatement4.setString (6, link);
             
             preStatement4.executeUpdate();
+            System.out.println("blast hit done");
             
             connect.close();                                                    //sluit de connectie met de database
             System.out.println("Wegschrijven is gelukt!");
