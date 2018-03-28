@@ -229,7 +229,8 @@ public class ApolloGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.out.println("test");
         DBConnector database = new DBConnector();
-        database.dbVuller("ACTGACTG", "dummie", 100, "GAC", 5, 95, 0, 7, 1, 100, "0test0", "asdf");
+        database.dbVuller(dnaSeq, dnaSeq, HEIGHT, dnaSeq, PROPERTIES, PROPERTIES, HEIGHT, WIDTH, ERROR, WIDTH, dnaSeq, dnaSeq);
+//        database.dbVuller("ACTGACTG", "dummie", 100, "GAC", 5, 95, 0, 7, 1, 100, "0test0", "asdf");
         System.out.println("test2");
     }//GEN-LAST:event_jMenu2MouseClicked
 
