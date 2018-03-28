@@ -21,8 +21,8 @@ public class ReadBuilder { //Feel free to edit the name
         temp.clear();
         for(int i = 0; i <= 2; i++){
             System.out.println("why: "+i);
-            reads.add(SequenceHandler.translate(DNAseq.substring(i)));
-            temp.add(SequenceHandler.translate(new StringBuilder(DNAseq).reverse().toString().substring(i)));
+            reads.add(DNAseq.substring(i));
+            temp.add(DNAseq.substring(i));
         }
         reads.addAll(temp);
         return reads;
