@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 */
 public class FileHandler {
     private static String sequence;
+    public static String header;
     
     public static String FileOpener(){
         int returnVal = ApolloGUI.fileChooser.showOpenDialog(ApolloGUI.fileChooser);
@@ -52,6 +53,7 @@ public class FileHandler {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine().trim();
                 if (line.charAt(0) == '>') {
+                    header = line;
                     if (first)
                         first = false;
                     else

@@ -283,8 +283,12 @@ public class ApolloGUI extends javax.swing.JFrame {
 
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
         System.out.println("test");
+//        System.out.println(dnaSeq);
+//        System.out.println(FileHandler.header);
         DBConnector database = new DBConnector();
-        database.dbVuller("ACTGACTG", "dummie", 100, "GAC", 0, 5, 0.5, 7.5, "XX00", "asdfEiwit", "GebakkenEi");
+// dnaSeq, header, ORF_sequentie,reading_frame,  hits, e_value, identity, accesion_code, eiwit, organisme
+        database.dbVuller();
+//        database.dbVuller("ACTGACTG", "dummie", "GAC", 0, 5, 0.5, 7.5, "XX00", "asdfEiwit", "GebakkenEi");
         System.out.println("test2");
     }//GEN-LAST:event_menu_SaveActionPerformed
 
