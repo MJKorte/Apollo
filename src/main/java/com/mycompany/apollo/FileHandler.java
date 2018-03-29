@@ -46,13 +46,13 @@ public class FileHandler {
     *
     *  Majority of code taken from https://rosettacode.org/wiki/FASTA_format#Java
     */
-    private static String ReadFile(File file) throws FileNotFoundException{
+    public static String ReadFile(File file) throws FileNotFoundException{
         boolean first = true;
         String seq = "";
         try (Scanner sc = new Scanner(file)) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine().trim();
-                if (line.charAt(0) == '>') {
+                if (sc.hasNextLine()&&line.charAt(0) == '>') {
                     header = line;
                     if (first)
                         first = false;
