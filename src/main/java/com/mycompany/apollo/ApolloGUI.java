@@ -211,7 +211,17 @@ public class ApolloGUI extends javax.swing.JFrame {
                 jMenu2ActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu2);
+        menu_Database.add(menu_Save);
+
+        menu_Load.setText("Load");
+        menu_Load.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_LoadActionPerformed(evt);
+            }
+        });
+        menu_Database.add(menu_Load);
+
+        jMenuBar1.add(menu_Database);
 
         setJMenuBar(jMenuBar1);
 
@@ -305,7 +315,14 @@ public class ApolloGUI extends javax.swing.JFrame {
 //        database.dbVuller("ACTGACTG", "dummie", "GAC", 0, 5, 0.5, 7.5, "XX00", "asdfEiwit", "GebakkenEi");
         System.out.println("test2");
     }//GEN-LAST:event_menu_SaveActionPerformed
-  
+
+    private void menu_LoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_LoadActionPerformed
+        // TODO add your handling code here:
+        System.out.println("laad mij niet");
+        DBLoader laadMij = new DBLoader();
+        laadMij.noData();
+    }//GEN-LAST:event_menu_LoadActionPerformed
+
     /**
      * @param args the command line arguments
      */
