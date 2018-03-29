@@ -22,8 +22,13 @@ import javax.swing.event.HyperlinkListener;
 import javax.swing.event.HyperlinkEvent;
 
 /**
+ * ApolloGUI is the main class of this project. It contains generated code for
+ * the creating of the GUI. It is also responsible for handling user input by
+ * calling methods or communicating with other classes.
  *
- * @author rogie
+ * @author Rogier
+ * @version %I%, %G%
+ * @since 1.0
  */
 public class ApolloGUI extends javax.swing.JFrame {
 
@@ -55,7 +60,7 @@ public class ApolloGUI extends javax.swing.JFrame {
         ORFs.add(new ORF(1, "MADDDALAE", 5));
 
     }
-
+    
     class MenuPaneHyperlinkListener implements HyperlinkListener {
 
         @Override

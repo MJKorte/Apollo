@@ -1,0 +1,24 @@
+Class javadoc:
+/**
+ * Paragraphs with information, split by <p>
+ * 
+ * @author      Author 1
+ * @author      Author 2 (optional)
+ * @version     %I%, %G%
+ * @since       1.0
+ */
+
+Method javadoc:
+/** 
+ * Paragraphs with information, split by <p>
+ *
+ * @param param 1   Desc of param1
+ * @param paramx         desc of paramx
+ *                  more desc of paramx
+ *                  even more desc of paramx
+ * @return ret1     desc of ret1
+ *                  more desc of ret1
+ * @see             translate          //Creates a link in javadoc that refers to the translate javadoc
+ * @since           1.0
+ * @Author          Author
+ */
