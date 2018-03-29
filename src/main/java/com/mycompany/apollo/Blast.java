@@ -45,7 +45,7 @@ public class Blast extends Thread {
     public ArrayList<String> read() throws FileNotFoundException {
         Boolean leeg = true;
         ArrayList<String> hits = new ArrayList<>();
-        File file = new File("C:\\Users\\Mark\\Documents\\JavaProjecten\\Apollo\\result.txt");
+        File file = new File("result.txt");
         while (leeg == true) {
             String result = ReadFile(file);
             if (result.isEmpty()) {

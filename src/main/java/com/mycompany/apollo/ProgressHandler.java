@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.apollo;
 
 import static com.mycompany.apollo.ApolloGUI.dnaSeq;
 import java.util.ArrayList;
 
 /**
- *
- * @author rogie
+ * Progresshandler keeps track of the file loading process. Building the different
+ * reads and translating them can take a while so a progressbar is used
+ * to show the progress.
+ * 
+ * @author rogier
  */
 public class ProgressHandler extends Thread {
 
