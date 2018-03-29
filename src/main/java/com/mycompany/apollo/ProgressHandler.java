@@ -16,12 +16,12 @@ public class ProgressHandler extends Thread {
 
     @Override
     public void run() {
-        ApolloGUI.analyseProgressBar.setIndeterminate(true);
-        ApolloGUI.analyseProgressBar.setString("Loading reading frames");
-        ApolloGUI.analyseProgressBar.setStringPainted(true);
+        ApolloGUI.jProgressBar1.setIndeterminate(true);
+        ApolloGUI.jProgressBar1.setString("Loading reading frames");
+        ApolloGUI.jProgressBar1.setStringPainted(true);
         ArrayList<String> buildReads = ReadBuilder.buildReads(dnaSeq);
-        ApolloGUI.analyseProgressBar.setIndeterminate(false);
-        ApolloGUI.analyseProgressBar.setStringPainted(false);
+        ApolloGUI.jProgressBar1.setIndeterminate(false);
+        ApolloGUI.jProgressBar1.setStringPainted(false);
         ArrayList<String> readsHTML = ORFanalyzer.findORF(buildReads);
         ApolloGUI.sequencePane.setText(
                 "<html>\n"

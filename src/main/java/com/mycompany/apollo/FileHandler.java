@@ -30,7 +30,7 @@ public class FileHandler {
                 System.out.println("A1");
                 sequence = checkSequence(sequence);
                 System.out.println("A2");
-                ApolloGUI.analyseProgressBar.setValue(0);
+                ApolloGUI.jProgressBar1.setValue(0);
                 return sequence;
             } catch (FileNotFoundException e) {
                 System.out.println("problem accessing file." + file.getAbsolutePath());
