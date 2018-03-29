@@ -164,26 +164,4 @@ public class DBConnector extends ApolloGUI {
 
 }
 
-/*
-            //query voor de ORF_ID
-            String getorfID_Query = "SELECT MAX(ORF_ID) as ORF_ID from ORF";    //Query voor het ophalen van de grootste ORF_ID
-            ResultSet rs2 = statement.executeQuery(getorfID_Query);             //Uitvoeren van de query
-            while (rs2.next()) {
-                orfID = rs2.getInt("ORF_ID");                                   //waarde ophalen uit de database
-                }      
-            orfID +=1;                                                          //1 wordt opgeteld bij de oude sequentie van 
-            
-            String getBlastID_Query = "SELECT MAX(blast_ID) as blast_ID from Blast_results";
-            ResultSet rs3 = statement.executeQuery(getBlastID_Query);
-            while (rs3.next()){
-                blastID = rs3.getInt("blast_ID");
-            }
-            blastID +=1;
-            
-            String getBlastHitID_Query = "SELECT MAX(Blast_hit_ID) as Blast_hit_ID from Blast_hit";
-            ResultSet rs4 = statement.executeQuery(getBlastHitID_Query);
-            while (rs4.next()){
-                blast_hitID = rs4.getInt("Blast_hit_ID");
-            }
-            blast_hitID +=1;
- */
+
