@@ -5,6 +5,8 @@
  */
 package com.mycompany.apollo;
 
+
+import java.io.IOException;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +44,14 @@ public class Blast extends Thread {
             }
 
             //Blast stuff here
-            //end blast stuff
+            ApolloGUI.ORFs.get(ORFid).setE_Value(0.000001);
+            try {
+                Process p = Runtime.getRuntime().exec("python blast.py");
+                //end blast stuff
+            } catch (IOException ex) {
+                Logger.getLogger(Blast.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          
             ApolloGUI.ORFs.get(ORFid).setBlastedTrue();
             ApolloGUI.blastButton.setEnabled(true);
         } catch (InterruptedException ex) {

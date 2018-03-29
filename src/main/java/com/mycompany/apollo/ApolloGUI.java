@@ -52,14 +52,7 @@ public class ApolloGUI extends javax.swing.JFrame {
     private JTextArea blastPopupText;
 
     /**
-     * This constructor is called when a new ApolloGUI is instantiated from
-     * main(). It calls initComponents() which instantiates the components that
-     * make up the GUI.
-     * <p>
-     * This method also prepares a pop-up that is shown when the user starts a
-     * blast.
-     *
-     * @see main
+     * Creates new form ApolloGUI
      */
     public ApolloGUI() {
         checkbox = new JCheckBox("Do not show this message again.");
@@ -74,7 +67,21 @@ public class ApolloGUI extends javax.swing.JFrame {
         initComponents();
 
         sequencePane.addHyperlinkListener(new MenuPaneHyperlinkListener());
+        ORFs.add(new ORF(0, "MEDNVA", 4));
+        ORFs.add(new ORF(1, "MADDDALAE", 5));
 
+    }
+    
+    class MenuPaneHyperlinkListener implements HyperlinkListener {
+
+        @Override
+        public void hyperlinkUpdate(HyperlinkEvent e) {
+            if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                System.out.println("clicked: " + e.getDescription());
+                currentORF = Integer.parseInt(e.getDescription());
+                updateGUI.updateORFInfoPane(Integer.valueOf(e.getDescription()));
+            }
+        }
     }
 
     /**
@@ -88,8 +95,8 @@ public class ApolloGUI extends javax.swing.JFrame {
 
         fileChooser = new javax.swing.JFileChooser();
         progressScreen = new javax.swing.JFrame();
-        analyseProgressBar = new javax.swing.JProgressBar();
-        analyseButton = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         sequencePane = new javax.swing.JTextPane();
@@ -98,11 +105,9 @@ public class ApolloGUI extends javax.swing.JFrame {
         ORFInfoPane = new javax.swing.JTextPane();
         blastButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menu_File = new javax.swing.JMenu();
-        menu_Open = new javax.swing.JMenuItem();
-        menu_Database = new javax.swing.JMenu();
-        menu_Save = new javax.swing.JMenuItem();
-        menu_Load = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        Open = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\Rogier\\OneDrive\\Documents\\Informatica\\Apollo"));
@@ -112,12 +117,11 @@ public class ApolloGUI extends javax.swing.JFrame {
         progressScreen.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         progressScreen.setAlwaysOnTop(true);
         progressScreen.setBounds(new java.awt.Rectangle(600, 500, 600, 500));
-        progressScreen.setResizable(false);
 
-        analyseButton.setText("Analyse");
-        analyseButton.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Analyse");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                analyseButtonActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -127,20 +131,20 @@ public class ApolloGUI extends javax.swing.JFrame {
             progressScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(progressScreenLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(analyseProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(progressScreenLayout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(analyseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(194, 194, 194)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         progressScreenLayout.setVerticalGroup(
             progressScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(progressScreenLayout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addComponent(analyseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(analyseProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(0, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90))
         );
 
@@ -152,7 +156,7 @@ public class ApolloGUI extends javax.swing.JFrame {
         sequencePane.setEditable(false);
         sequencePane.setContentType("text/html"); // NOI18N
         sequencePane.setFont(new java.awt.Font("Courier New", 0, 27)); // NOI18N
-        sequencePane.setText("<html>\n\t<style type=\"text/css\">\n\t\tspan {\n\t\t\tbackground-color: #f18973;\n\n\t\t}\n\t\ta{\n\t\t\tcolor: black;\n\t\t\ttext-decoration: none;\n\t\t}\n\t</style>\n\t<head>\n   </head>\n   <body>\n     \t<p style=\"margin-top: 0\">\n\t\t\t<br>\n\t\t\tLoad a file to get started\n\t\t\t<br><br><br><br><br><br><br>\n\t\t</p>\n   \t</body>\n </html>");
+        sequencePane.setText("<html>\n\t<style type=\"text/css\">\n\t\tspan {\n\t\t\tbackground-color: #f18973;\n\n\t\t}\n\t\ta{\n\t\t\tcolor: black;\n\t\t\ttext-decoration: none;\n\t\t}\n\t</style>\n\t<head>\n   </head>\n   <body>\n     \t<p style=\"margin-top: 0\">\n\t\t\t<br>\n\t\t\tLoad a file to get started<br>ABCABCABC<br>A C T G<br>\n\t\t\t<span><a href=0>ORF numero uno</a></span><br>\n\t\t\t<span><a href=1>ORF numero dos</a></span><br><br><br>\n\t\t</p>\n   \t</body>\n </html>\n ");
         sequencePane.addHyperlinkListener(new javax.swing.event.HyperlinkListener() {
             public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {
                 sequencePaneHyperlinkUpdate(evt);
@@ -184,42 +188,30 @@ public class ApolloGUI extends javax.swing.JFrame {
             }
         });
 
-        menu_File.setText("File");
+        jMenu1.setText("File");
 
-        menu_Open.setText("Open");
-        menu_Open.addActionListener(new java.awt.event.ActionListener() {
+        Open.setText("Open");
+        Open.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_OpenActionPerformed(evt);
+                OpenActionPerformed(evt);
             }
         });
-        menu_File.add(menu_Open);
+        jMenu1.add(Open);
 
-        jMenuBar1.add(menu_File);
+        jMenuBar1.add(jMenu1);
 
-        menu_Database.setText("Database");
-        menu_Database.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenu2.setText("Save");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menu_DatabaseMouseClicked(evt);
+                jMenu2MouseClicked(evt);
             }
         });
-        menu_Database.addActionListener(new java.awt.event.ActionListener() {
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_DatabaseActionPerformed(evt);
+                jMenu2ActionPerformed(evt);
             }
         });
-
-        menu_Save.setText("Save");
-        menu_Save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_SaveActionPerformed(evt);
-            }
-        });
-        menu_Database.add(menu_Save);
-
-        menu_Load.setText("Load");
-        menu_Database.add(menu_Load);
-
-        jMenuBar1.add(menu_Database);
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -266,21 +258,22 @@ public class ApolloGUI extends javax.swing.JFrame {
     private void menu_OpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_OpenActionPerformed
         dnaSeq = FileHandler.FileOpener();
         progressScreen.setVisible(true);
-    }//GEN-LAST:event_menu_OpenActionPerformed
+    }//GEN-LAST:event_OpenActionPerformed
 
     private void sequencePaneHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_sequencePaneHyperlinkUpdate
         System.out.println(evt.getDescription());
     }//GEN-LAST:event_sequencePaneHyperlinkUpdate
 
-    private void analyseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analyseButtonActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ProgressHandler progressHandler = new ProgressHandler();
         progressHandler.start();
 
-    }//GEN-LAST:event_analyseButtonActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void menu_DatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_DatabaseActionPerformed
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
 
-    }//GEN-LAST:event_menu_DatabaseActionPerformed
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
 
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
@@ -301,16 +294,15 @@ public class ApolloGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_blastButtonActionPerformed
 
+
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
         System.out.println("test");
         DBConnector database = new DBConnector();
         database.dbVuller("ACTGACTG", "dummie", 100, "GAC", 0, 5, 0.5, 7.5, "XX00", "asdfEiwit", "GebakkenEi");
         System.out.println("test2");
     }//GEN-LAST:event_menu_SaveActionPerformed
-
+  
     /**
-     * test
-     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -368,33 +360,19 @@ public class ApolloGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextPane ORFInfoPane;
-    private javax.swing.JButton analyseButton;
-    public static javax.swing.JProgressBar analyseProgressBar;
+    private javax.swing.JMenuItem Open;
     public static javax.swing.JButton blastButton;
     public static javax.swing.JFileChooser fileChooser;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    public static javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JMenu menu_Database;
-    private javax.swing.JMenu menu_File;
-    private javax.swing.JMenuItem menu_Load;
-    private javax.swing.JMenuItem menu_Open;
-    private javax.swing.JMenuItem menu_Save;
     public static javax.swing.JFrame progressScreen;
     public static javax.swing.JTextPane sequencePane;
     // End of variables declaration//GEN-END:variables
-}
-
-class MenuPaneHyperlinkListener implements HyperlinkListener {
-
-    @Override
-    public void hyperlinkUpdate(HyperlinkEvent e) {
-        if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-            System.out.println("clicked: " + e.getDescription());
-            ApolloGUI.currentORF = Integer.parseInt(e.getDescription());
-            updateGUI.updateORFInfoPane(Integer.valueOf(e.getDescription()));
-        }
-    }
 }
