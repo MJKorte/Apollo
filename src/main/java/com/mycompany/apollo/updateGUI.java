@@ -1,20 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.apollo;
 
 /**
- *
- * @author rogie
+ * This class is used to update the  GUI when new information is available.
+ * 
+ * @author Rogier
  */
 public class updateGUI {
 
+    /**
+     * @deprecated 
+     */
     public void updateReads() {
 
     }
 
+    /**
+     * Updates the ORFInfoPane (second text area in the GUI).
+     * It shows general ORF information. It also checks whether the ORF has 
+     * blast results and displays them if it does.
+     * @param ORFid     The id of the selected ORF in the GUI
+     */
     public static void updateORFInfoPane(int ORFid) {
         String updatedText;
         ORF orf = ApolloGUI.ORFs.get(ORFid);
