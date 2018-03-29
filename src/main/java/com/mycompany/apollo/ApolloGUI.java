@@ -255,10 +255,10 @@ public class ApolloGUI extends javax.swing.JFrame {
      * the action event.
      */
     
-    private void menu_OpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_OpenActionPerformed
+    private void menu_OpenActionPerformed(java.awt.event.ActionEvent evt) {                                          
         dnaSeq = FileHandler.FileOpener();
         progressScreen.setVisible(true);
-    }//GEN-LAST:event_OpenActionPerformed
+    }                                    
 
     private void sequencePaneHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt) {//GEN-FIRST:event_sequencePaneHyperlinkUpdate
         System.out.println(evt.getDescription());

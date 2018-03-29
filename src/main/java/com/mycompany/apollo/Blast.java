@@ -29,50 +29,14 @@ public class Blast extends Thread {
     @Override
     public void run() {
 
-        try {
-            ApolloGUI.blastButton.setEnabled(false);
-            System.out.println("cur: " + Thread.currentThread());
-
-            String file = FileHandler.FileOpener();
-
-            while (true) {
-                if (file.isEmpty()) {
-                    Thread.sleep(10000);
-                } else {
-                    break;
-                }
-            }
-
-            //Blast stuff here
-            ApolloGUI.ORFs.get(ORFid).setE_Value(0.000001);
             try {
                 Process p = Runtime.getRuntime().exec("python blast.py");
-                //end blast stuff
             } catch (IOException ex) {
                 Logger.getLogger(Blast.class.getName()).log(Level.SEVERE, null, ex);
             }
           
             ApolloGUI.ORFs.get(ORFid).setBlastedTrue();
             ApolloGUI.blastButton.setEnabled(true);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Blast.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        //Backup of test stuff
-//        try {
-//            ApolloGUI.blastButton.setEnabled(false);
-//            System.out.println("cur: "+Thread.currentThread());
-//            Thread.sleep(5000);
-//            
-//            //Blast stuff here
-//            ApolloGUI.ORFs.get(ORFid).setE_Value(0.000001);
-//            //end blast stuff
-//            
-//            ApolloGUI.ORFs.get(ORFid).setBlastedTrue();
-//            ApolloGUI.blastButton.setEnabled(true);
-//        } catch (InterruptedException ex) {
-//            System.out.println("this aint happenin");
-//            Logger.getLogger(Blast.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
 }
