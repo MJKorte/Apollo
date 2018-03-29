@@ -38,7 +38,7 @@ public class ORFanalyzer {
             String currentORF = "";
             for (int x = 0; x < reads.get(i).length() / 3; x++) {
                 countDone++;
-                ApolloGUI.analyseProgressBar.setValue((int) ((countDone / countMax) * 100));
+                ApolloGUI.jProgressBar1.setValue((int) ((countDone / countMax) * 100));
                 String protein = TranslatorFW.translate(reads.get(i).substring(3*x, 3*(x+1)));
                 if (protein.equals("M") && ORF == false && reads.get(i).length()/3 - x > 100) {
                     ORF = true;
