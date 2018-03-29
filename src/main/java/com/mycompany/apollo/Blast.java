@@ -32,7 +32,7 @@ public class Blast extends Thread {
             //Blast stuff here
             ApolloGUI.ORFs.get(ORFid).setE_Value(0.000001);
             try {
-                Process p = Runtime.getRuntime().exec("C:\\ProgramData\\Anaconda3\\python.exe yourapp.py");
+                Process p = Runtime.getRuntime().exec("python blast.py");
                 //end blast stuff
             } catch (IOException ex) {
                 Logger.getLogger(Blast.class.getName()).log(Level.SEVERE, null, ex);
