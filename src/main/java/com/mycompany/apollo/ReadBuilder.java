@@ -16,6 +16,11 @@ public class ReadBuilder { //Feel free to edit the name
     private static ArrayList<String> reads = new ArrayList<>();
     private static ArrayList<String> temp = new ArrayList<>();
     
+    /**
+     *
+     * @param DNAseq
+     * @return
+     */
     public static ArrayList<String> buildReads(String DNAseq){
         reads.clear();
         temp.clear();

@@ -11,10 +11,17 @@ package com.mycompany.apollo;
  */
 public class updateGUI {
 
+    /**
+     *
+     */
     public void updateReads() {
 
     }
 
+    /**
+     *
+     * @param ORFid
+     */
     public static void updateORFInfoPane(int ORFid) {
         String updatedText;
         ORF orf = ApolloGUI.ORFs.get(ORFid);

@@ -14,6 +14,9 @@ import java.util.ArrayList;
  */
 public class ProgressHandler extends Thread {
 
+    /**
+     *
+     */
     @Override
     public void run() {
         ApolloGUI.analyseProgressBar.setIndeterminate(true);
