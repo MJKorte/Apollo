@@ -21,8 +21,6 @@ public class DBConnector extends ApolloGUI {
     /**
      *
      */
-    //dnaSeq, FileHandler.header, ORFs.get(1).sequentie, ORFs.get(1).readNr, 111, ORFs.get(1).E_Value, 10.0, "XX000", "eiwit", "organisme"
-//    String dnaSeq, String header, String ORF_sequentie, int reading_frame, int hits, double e_value, double identity, String accesion_code, String eiwit, String organisme
     public void dbVuller() {
 //        System.out.println("dbvuller test");
         try {
@@ -38,14 +36,13 @@ public class DBConnector extends ApolloGUI {
         PreparedStatement preStatement3 = null;
         PreparedStatement preStatement4 = null;
 
-//        String myDriver = "com.mysql.jdbc.Driver";                              //Driver
         //Connection type : protocol : host : port : database
         String myUrl = "jdbc:oracle:thin:@cytosine.nl:1521:xe";
         String User = "owe7_pg10";
         String Password = "blaat1234";
 
         try {
-            connect = DriverManager.getConnection(myUrl, User, Password);  //URL : Username : wachtwoord
+            connect = DriverManager.getConnection(myUrl, User, Password);       //URL : Username : wachtwoord
         
         entryIDCounter(connect);
         if (!dnaSeq.isEmpty()) {
@@ -67,7 +64,7 @@ public class DBConnector extends ApolloGUI {
             System.out.println("Geen bestand geselecteerd!!");
         }
         
-        connect.close();                                                    //sluit de connectie met de database
+        connect.close();                                                        //sluit de connectie met de database
             System.out.println("Wegschrijven is gelukt!");
             JOptionPane.showMessageDialog(null, "Het ORF met bijbehorende informatie is weggeschreven naar de database.", "Succes", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
@@ -81,10 +78,10 @@ public class DBConnector extends ApolloGUI {
         try {
             System.out.println("entry id " + entryID);
             //query voor het inserten in sequentie tabel
-            String insertSeqQuery = "INSERT INTO entry(entry_ID, sequence, entry_name) VALUES(?,?,?)"; //query 2
+            String insertSeqQuery = "INSERT INTO entry(entry_ID, sequence, entry_name) VALUES(?,?,?)"; //query schrijft entry data in db
             preStatement1 = connect.prepareStatement(insertSeqQuery);           //PreStatement1 wordt gekoppeld aan de sequenties query
-            preStatement1.setInt(1, entryID);                            //Getal staat voor de locatie in de query, object staat voor variabele in javav die moet worden opgeslagen
-            preStatement1.setString(2, dnaSeq);
+            preStatement1.setInt(1, entryID);                                   //Getal staat voor de locatie in de query, object staat voor variabele in javav die moet worden opgeslagen
+            preStatement1.setString(2, dnaSeq);                             
             preStatement1.setString(3, header);
 
             preStatement1.executeUpdate();                                      //update de tabel
@@ -98,8 +95,8 @@ public class DBConnector extends ApolloGUI {
         try {
             System.out.println("ORF id " + orfID);
             //query voor het inserten in ORF tabel
-            String insertORFQuery = "INSERT INTO ORF(ORF_ID, entry_entry_ID, ORF_sequence, reading_frame) VALUES(?,?,?,?)"; //Query
-            preStatement2 = connect.prepareStatement(insertORFQuery);              //PreStatement2 wordt gekoppeld aan de ORF query
+            String insertORFQuery = "INSERT INTO ORF(ORF_ID, entry_entry_ID, ORF_sequence, reading_frame) VALUES(?,?,?,?)"; //Query schrijft orf data in db
+            preStatement2 = connect.prepareStatement(insertORFQuery);           //PreStatement2 wordt gekoppeld aan de ORF query
             preStatement2.setInt(1, orfID);
             preStatement2.setInt(2, entryID);
             preStatement2.setString(3, ORF_sequentie);
@@ -115,7 +112,7 @@ public class DBConnector extends ApolloGUI {
     public void blastResVuller(PreparedStatement preStatement3, Connection connect,int blastID, int orfID, int hits) {
         try {
             System.out.println("blast id " + blastID);
-            String insertBLASTQuery = "INSERT INTO Blast_results(blast_ID, ORF_ORF_ID, hits) VALUES(?,?,?)"; //query
+            String insertBLASTQuery = "INSERT INTO Blast_results(blast_ID, ORF_ORF_ID, hits) VALUES(?,?,?)"; //query schrijft blast data in db
             preStatement3 = connect.prepareStatement(insertBLASTQuery);
             preStatement3.setInt(1, blastID);
             preStatement3.setInt(2, orfID);
@@ -130,7 +127,7 @@ public class DBConnector extends ApolloGUI {
 
     public void blastHitVuller(PreparedStatement preStatement4, Connection connect, int blastID, int blast_hitID, double e_value, double identity, String accesion_code, String eiwit, String organisme) {
         try {
-            System.out.println("hit id" + blast_hitID);
+            System.out.println("hit id" + blast_hitID);                         // querry schrijft hit data in db
             String insertBLAST_hitQuery = "INSERT INTO Blast_hit(Blast_hit_ID, E_Value, identity_score, accession_code, Blast_results_blast_ID, protein_name, organism_name) VALUES(?,?,?,?,?,?,?)";
             preStatement4 = connect.prepareStatement(insertBLAST_hitQuery);
             preStatement4.setInt(1, blast_hitID);
@@ -156,9 +153,9 @@ public class DBConnector extends ApolloGUI {
             String getseqID_Query = "SELECT MAX(entry_ID) as entry_ID from entry"; //Query voor het ophalen van de grootste entry_ID
             ResultSet rs1 = statement.executeQuery(getseqID_Query);             //Uitvoeren van de query
             while (rs1.next()) {
-                entryID = rs1.getInt("entry_ID");                                   //Waarde ophalen uit database
+                entryID = rs1.getInt("entry_ID");                               //Waarde ophalen uit database
             }
-            entryID += 1;                                                          //1 wordt opgeteld bij de oude sequentie voor een niewe entry id.
+            entryID += 1;                                                       //1 wordt opgeteld bij de oude sequentie voor een niewe entry id.
 
         }catch (SQLException e){
             e.printStackTrace();

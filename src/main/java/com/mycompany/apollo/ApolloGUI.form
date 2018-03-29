@@ -116,6 +116,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Load"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menu_LoadActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
