@@ -262,9 +262,15 @@ public class ApolloGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_menu_DatabaseActionPerformed
 
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+
+    }//GEN-LAST:event_jMenu2MouseClicked
+
     private void menu_DatabaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_DatabaseMouseClicked
 
     }//GEN-LAST:event_menu_DatabaseMouseClicked
+
 
     private void blastButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blastButtonActionPerformed
         Blast blast = new Blast(currentORF);
@@ -278,7 +284,7 @@ public class ApolloGUI extends javax.swing.JFrame {
     private void menu_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SaveActionPerformed
         System.out.println("test");
         DBConnector database = new DBConnector();
-        database.dbVuller("ACTGACTG", "dummie", 100, "GAC", 5, 95, 0, 7, 1, 100, "0test0", "asdf");
+        database.dbVuller("ACTGACTG", "dummie", 100, "GAC", 0, 5, 0.5, 7.5, "XX00", "asdfEiwit", "GebakkenEi");
         System.out.println("test2");
     }//GEN-LAST:event_menu_SaveActionPerformed
 

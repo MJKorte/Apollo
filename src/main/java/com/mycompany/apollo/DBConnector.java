@@ -10,18 +10,34 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author BramWeenink
+ * DBConnector creëert een connectie met een oracle database en schrijft data daarin weg.
+ * De database is te benaderen via Oracle sql developer. 
  */
 public class DBConnector extends ApolloGUI {
     
-    int entryID;  // entry is de naam die wie hebben gekozen voor de sequentie
+    int entryID;    // entry is de naam die wie hebben gekozen voor de sequentie
     int orfID;
     int blastID;
     int blast_hitID;
     
-    public void dbVuller(String dnaSeq, String header, int lengte, String ORF_sequentie, int start_positie, int stop_positie, int reading_frame, int hits, int e_value, int identity, String accesion_code, String link){
-        System.out.println("dbvuller test");
+    /**
+     *
+     * @param dnaSeq
+     * @param header
+     * @param lengte
+     * @param ORF_sequentie
+     * @param reading_frame
+     * @param hits
+     * @param e_value
+     * @param eiwit
+     * @param organisme
+     * @param identity
+     * @param accesion_code
+     */
+    public void dbVuller(String dnaSeq, String header, int lengte, String ORF_sequentie, int reading_frame, int hits, double e_value, double identity, String accesion_code, String eiwit, String organisme){
+//        System.out.println("dbvuller test");
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName("oracle.jdbc.driver.OracleDriver");                   // oracle jdbc driver nodig ojdbc8
         } catch (ClassNotFoundException e) {                                    //Exception handling voor vinden van de plugin
             e.printStackTrace();
         }
@@ -111,14 +127,15 @@ public class DBConnector extends ApolloGUI {
             System.out.println("Blast result done");
             
             System.out.println("hit id"+blast_hitID);
-            String insertBLAST_hitQuery = "INSERT INTO Blast_hit(Blast_hit_ID, E_Value, identity_score, accession_code, Blast_results_blast_ID, url_link) VALUES(?,?,?,?,?,?)";
+            String insertBLAST_hitQuery = "INSERT INTO Blast_hit(Blast_hit_ID, E_Value, identity_score, accession_code, Blast_results_blast_ID, protein_name, organism_name) VALUES(?,?,?,?,?,?,?)";
             preStatement4 = connect.prepareStatement(insertBLAST_hitQuery);
             preStatement4.setInt    (1, blast_hitID);
-            preStatement4.setInt    (2, e_value);
-            preStatement4.setInt    (3, identity);
+            preStatement4.setDouble (2, e_value);
+            preStatement4.setDouble (3, identity);
             preStatement4.setString (4, accesion_code);
             preStatement4.setInt    (5, blastID);
-            preStatement4.setString (6, link);
+            preStatement4.setString (6, eiwit);
+            preStatement4.setString (7, organisme);
             
             preStatement4.executeUpdate();
             System.out.println("blast hit done");
