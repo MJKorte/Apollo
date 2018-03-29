@@ -56,13 +56,13 @@ def blast_resultaat(sequence, result):
             for hsp in alignment.hsps:
                 if z != 5: #controle zodat er max 10 resultaten worden opgeslagen
                     naam, organisme, taxonomie, beschrijving, comment = ncbi_entrez(alignment.accession) #aanroeping van ncbi entrez
-                    data += (alignment.accession+'[split]'+str(hsp.expect)+'[split]'+str(hsp.score)+
-                             '[split]'+naam+'[split]'+organisme+'\n\n')
+                    data += (alignment.accession+'\t'+str(hsp.expect)+'\t'+str(hsp.score)+
+                             '\t'+naam+'\t'+organisme+'\n')
                     z += 1
                     data_lijst.append(data)
                     data=""
     file = open("result.txt",'w')
-    file.write(ORFid+"\n\n")
+    file.write(ORFid+"\n")
     for x in data_lijst:
         file.write(x)
     file.write(str(len(data_lijst)))

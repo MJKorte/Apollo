@@ -1,0 +1,7 @@
+45
+NP_174541	0.0	3334.0	Basic helix-loop-helix (bHLH) DNA-binding family protein [Arabidopsis thaliana]	Arabidopsis thaliana
+AAL55713	0.0	3332.0	putative transcription factor BHLH6 [Arabidopsis thaliana]	Arabidopsis thaliana
+BAA25078	0.0	3268.0	RD22BP1 [Arabidopsis thaliana]	Arabidopsis thaliana
+XP_002893732	0.0	3206.0	transcription factor MYC2 [Arabidopsis lyrata subsp. lyrata]	Arabidopsis lyrata subsp. lyrata
+XP_010478689	0.0	2989.0	PREDICTED: LOW QUALITY PROTEIN: transcription factor MYC2-like [Camelina sativa]	Camelina sativa
+5
