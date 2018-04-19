@@ -13,13 +13,21 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 
 /**
- *
+ *Deze class zortg ervoor dat het gekozen berstand kan worden ingelezzen en de data uit het bestand kan worden opgeslagen
+ * Deze sequentie word daarna door filebuilder in reading frames verdeeld
+ * 
  * @author Rogier
 */
 public class FileHandler {
+    /**
+     * declaratie van variabelen
+     */
     private static String sequence;
     public static String header;
-    
+    /**
+     * Door middel van een 
+     * @return de inhoud van de file opgeslagen in een string
+     */
     public static String FileOpener(){
         int returnVal = ApolloGUI.fileChooser.showOpenDialog(ApolloGUI.fileChooser);
         if (returnVal == JFileChooser.APPROVE_OPTION) {

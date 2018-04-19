@@ -56,7 +56,7 @@ def blast_resultaat(sequence, result):
             for hsp in alignment.hsps:
                 if z != 5: #controle zodat er max 10 resultaten worden opgeslagen
                     naam, organisme, taxonomie, beschrijving, comment = ncbi_entrez(alignment.accession) #aanroeping van ncbi entrez
-                    data += (alignment.accession+'\t'+str(hsp.expect)+'\t'+str(hsp.score)+
+                    data += (str(hsp.expect)+'\t'+str(hsp.score)+'\t'alignment.accession+
                              '\t'+naam+'\t'+organisme+'\n')
                     z += 1
                     data_lijst.append(data)

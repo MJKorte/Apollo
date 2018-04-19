@@ -10,35 +10,60 @@ package com.mycompany.apollo;
  * @author rogie
  */
 public class ORF {
-
+    
+    /**
+     * Declaratie van de variabelen
+     */
     public int orfID;
     public String sequentie;
     public int readNr;
     public boolean blasted;
     public double E_Value;
 
+    /**
+     * Deze functie neemt de informattie over het ORF aan van ORFanalyzer
+     * De informatie word opgeslagen in het object ORF
+     * @param id
+     * @param seq
+     * @param read 
+     */
     public ORF(int id, String seq, int read) {
         orfID = id;
         sequentie = seq;
         readNr = read;
     }
-
+    /**
+     * Getter
+     * @return de lengte van de sequentie
+     */
     public int getSequenceLength() {
         return sequentie.length();
     }
-
+    
+    /**
+     * Setter om de status van de BLast op te slaan
+     */
     public void setBlastedTrue() {
         this.blasted = true;
     }
-
+    /**
+     * Getter voor de Blaststatus
+     * @return de status van de blast 
+     */
     public boolean getBlasted() {
         return this.blasted;
     }
-
+    /**
+     * Setter voor de E-value
+     * @param e 
+     */
     public void setE_Value(double e) {
         this.E_Value = e;
     }
-
+    /**
+     * Getter voor de e-value
+     * @return e-value
+     */
     public double getE_Value() {
         return E_Value;
     }
