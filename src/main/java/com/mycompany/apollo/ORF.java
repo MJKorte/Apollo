@@ -6,7 +6,10 @@
 package com.mycompany.apollo;
 
 /**
- *
+ * ORF is the object class for Open Reading Frames.
+ * The ORF objects are instantiated when the ORF's are found.
+ * When an ORF is blasted the blast results will be stored in its instance.
+ * 
  * @author rogie
  */
 public class ORF {
