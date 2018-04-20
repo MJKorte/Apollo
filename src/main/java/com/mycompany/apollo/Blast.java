@@ -15,18 +15,33 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Deze class geeft de mogelijkheid de gevonden ORF's te blasten de blast word
+ * door middel van een python script uitgevoerd Door te checken of het bestand
+ * informatie uit de blast bevat word gekeken of de blast gelukt is.
  *
  * @author rogie
  */
 public class Blast extends Thread {
 
+    /*
+    declaratie variablen
+     */
     private int ORFid;
 
+    /**
+     * neemt het ORFid en zet deze als variabele in de class
+     *
+     * @param ORFid
+     */
     public Blast(int ORFid) {
         this.ORFid = ORFid;
         System.out.println("blasting ORF " + ORFid);
     }
 
+    /**
+     * Deze methode zorgt ervoor dat het bestand met het python script kan
+     * worden aangeroepen
+     */
     @Override
     public void run() {
 
@@ -42,6 +57,13 @@ public class Blast extends Thread {
         //ApolloGUI.blastButton.setEnabled(true);
     }
 
+    /**
+     * Deze functie controleert of het blast bestand gevuld is en leest deze
+     * informatie in
+     *
+     * @return
+     * @throws FileNotFoundException
+     */
     public ArrayList<String> read() throws FileNotFoundException {
         Boolean leeg = true;
         ArrayList<String> hits = new ArrayList<>();
@@ -64,15 +86,21 @@ public class Blast extends Thread {
 
         return null;
     }
-        public static String ReadFile(File file) throws FileNotFoundException{
+    /**
+     * Deze functie word door de methode read() gebruikt om het bestand dmv van een scanner in te lezen
+     * @param file
+     * @return
+     * @throws FileNotFoundException 
+     */
+    public static String ReadFile(File file) throws FileNotFoundException {
         boolean first = true;
         String seq = "";
         try (Scanner sc = new Scanner(file)) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine().trim();
                 seq += line;
-                }
             }
+        }
         return seq;
     }
 }

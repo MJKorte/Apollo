@@ -1,9 +1,8 @@
 package com.mycompany.apollo;
 
 /**
- * This class is used to update the  GUI when new information is available.
- * 
- * @author Rogier
+ * deze class zorgt ervoor dat de GUI geupdate word en wijzegingen worden weergegeven.
+ * @author rogie
  */
 public class updateGUI {
 

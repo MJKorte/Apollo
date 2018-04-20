@@ -8,17 +8,30 @@ package com.mycompany.apollo;
 import java.util.ArrayList;
 
 /**
- *
+ *ORFanalyzer neemt de 6 verschillende reads van ReadBuilder, loopt over deze reads heen en bouwt een HTML string  om de ORF's te visualiseren
+ *Tevens wordt er een per ORF een ORF object gemaakt die word gebruikt om de ORF's op te slaan en in de database op te slaan.
+ * 
  * @author Mark
+ * @since 04-03=2018
  */
 public class ORFanalyzer {
 
-    //GG
+    /*
+    *Declaratie van variabelen
+    */ 
     public static ArrayList<ORF> ORFs = new ArrayList<ORF>();
     public static ArrayList<String> htmlcode = new ArrayList<String>();
     public static double countMax;
     public static double countDone = 0;
-
+    
+    /**
+     * Deze methode neemt de 6 reading frames uit ReadBuilder aan
+     * Veervolgens word er over deze reading frames heen gelooped en een HTML string gebouwd
+     * De gevonden ORF's worden in een lijst opgeslagen als het object "ORF"
+     * Er zijn twee for-loops gehardcode maar om een for loop te gebruiken kostte meer code dan deze manier
+     * 
+     * @param reads
+     */
     public static ArrayList<String> findORF(ArrayList<String> reads) {
         ORFs.clear();
         htmlcode.clear();

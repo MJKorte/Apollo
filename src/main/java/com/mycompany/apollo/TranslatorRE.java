@@ -6,7 +6,7 @@
 package com.mycompany.apollo;
 
 /**
- *
+ *deze class bevat switch cases voor de het vertalen van de reverse sequentie
  * @author Mark
  */
 public class TranslatorRE {

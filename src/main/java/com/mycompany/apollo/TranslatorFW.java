@@ -1,8 +1,8 @@
 package com.mycompany.apollo;
 
 /**
- * This class is responsible for translating a DNA triplet into an amino acid.
- * @author Mark
+ * deze class bevat switch cases voor de het vertalen van de forward sequentie
+ * @author rogie
  */
 public class TranslatorFW {
 

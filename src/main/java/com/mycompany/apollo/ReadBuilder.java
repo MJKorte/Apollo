@@ -7,14 +7,17 @@ import java.util.ArrayList;
  * @author Mark
  */
 public class ReadBuilder { //Feel free to edit the name
-    
+    /**
+     * Declaratie van variablen
+     */
     private static ArrayList<String> reads = new ArrayList<>();
     private static ArrayList<String> temp = new ArrayList<>();
-    
+  
     /**
-     *
-     * @param DNAseq  The original DNA sequence
-     * @return reads  An arraylist with the 6 different reads  
+     * Deze methode neemt een sequentie aan en verdeeld deze in 6 verschillende RF's met forward en reverse
+     * Vervolgens worden deze reading frames opgeslagen in een ArrayList
+     * @param DNAseq
+     * @return reads lijst met 6 verschillende reading frames
      */
     public static ArrayList<String> buildReads(String DNAseq){
         reads.clear();
