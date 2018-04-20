@@ -6,7 +6,7 @@
 package com.mycompany.apollo;
 
 /**
- *
+ * deze class zorgt ervoor dat de GUI geupdate word en wijzegingen worden weergegeven.
  * @author rogie
  */
 public class updateGUI {

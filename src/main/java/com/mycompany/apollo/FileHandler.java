@@ -13,7 +13,7 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 
 /**
- *Deze class zortg ervoor dat het gekozen berstand kan worden ingelezzen en de data uit het bestand kan worden opgeslagen
+ *Deze class zortg ervoor dat het gekozen berstand kan worden ingelezen en de data uit het bestand kan worden opgeslagen
  * Deze sequentie word daarna door filebuilder in reading frames verdeeld
  * 
  * @author Rogier
@@ -25,7 +25,7 @@ public class FileHandler {
     private static String sequence;
     public static String header;
     /**
-     * Door middel van een 
+     * Door middel van een regular expression word de sequentie gescand op karakters die er niet in horen.
      * @return de inhoud van de file opgeslagen in een string
      */
     public static String FileOpener(){
@@ -54,6 +54,12 @@ public class FileHandler {
     *
     *  Majority of code taken from https://rosettacode.org/wiki/FASTA_format#Java
     */
+    /**
+     * Deze methode krijgt een bestandspad die door middel van een scanner het bestand inleest
+     * @param file
+     * @return sequentie
+     * @throws FileNotFoundException 
+     */
     public static String ReadFile(File file) throws FileNotFoundException{
         boolean first = true;
         String seq = "";
@@ -75,7 +81,11 @@ public class FileHandler {
         }
         return seq;
     }
-    
+    /**
+     * Door middel van een regedit word de sequentie gecontroleerd door een regular expression
+     * @param seq
+     * @return de DNA sequentie
+     */
     private static String checkSequence(String seq){
         if (seq.matches("[ATGCN]+")){
             return seq;
