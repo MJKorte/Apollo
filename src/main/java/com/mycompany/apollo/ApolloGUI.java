@@ -25,7 +25,15 @@ import javax.swing.event.HyperlinkEvent;
  * ApolloGUI is the main class of this project. It contains generated code for
  * the creating of the GUI. It is also responsible for handling user input by
  * calling methods or communicating with other classes.
- *
+ * 
+ *          
+ *  KNOWN BUGS
+ * - When an ORF is blasted without the proper selection of the ORF the BLAST will not succeed and the program will get stuck.
+ * - If a selected file doesn't have the correct FASTA format the program will run but wont analyze the ORF's properly.
+ * - When repeatedly clicking the BLAST button, the python script will start again and again and will overload the BLAST query resulting in a freeze.
+ * 
+ * 
+ * 
  * @author Rogier
  * @version %I%, %G%
  * @since 1.0
